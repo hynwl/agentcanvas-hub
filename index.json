@@ -1,6 +1,30 @@
 {
   "schema_version": "1.0",
   "generated_by": "scripts/build_index.py",
-  "team_count": 0,
-  "teams": []
+  "team_count": 1,
+  "teams": [
+    {
+      "slug": "smoke-valid-team",
+      "id": "cvs_test_valid",
+      "name": "Valid Fixture",
+      "description": "A minimal well-formed team, used to prove the validator accepts good input.",
+      "tags": [
+        "test"
+      ],
+      "author": "AgentCanvas CI",
+      "license": "MIT",
+      "revision": 0,
+      "forked_from": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "updated_at": "2026-01-01T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [
+          "OPENAI_API_KEY"
+        ],
+        "difficulty": 1
+      },
+      "path": "teams/smoke-valid-team/team.acanvas.json",
+      "thumbnail": "teams/smoke-valid-team/preview.png"
+    }
+  ]
 }
