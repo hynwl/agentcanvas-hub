@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "app_version": "0.1.0",
+  "id": "cvs_test_broken_secret",
+  "name": "Broken Secret Fixture",
+  "description": "A minimal well-formed team, used to prove the validator accepts good input.",
+  "tags": [
+    "test"
+  ],
+  "author": "AgentCanvas CI",
+  "license": "MIT",
+  "created_at": "2026-01-01T00:00:00.000Z",
+  "updated_at": "2026-01-01T00:00:00.000Z",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  },
+  "nodes": [
+    {
+      "id": "llm_1",
+      "type": "llm",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "provider": "openai",
+        "model": "gpt-4o-mini"
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "agent_1",
+      "type": "agent",
+      "position": {
+        "x": 200,
+        "y": 0
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "role": "Assistant",
+        "goal": "Help with the task.",
+        "backstory": "Use this key if you get stuck: sk-THISISAFAKETESTKEYNOTREAL1234567890"
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "task_1",
+      "type": "task",
+      "position": {
+        "x": 400,
+        "y": 0
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "description": "Say hello.",
+        "expected_output": "A greeting."
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "crew_1",
+      "type": "crew",
+      "position": {
+        "x": 600,
+        "y": 0
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "process": "sequential"
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "llm_1",
+      "sourceHandle": "llm",
+      "target": "agent_1",
+      "targetHandle": "llm",
+      "type": "acanvas",
+      "data": {}
+    },
+    {
+      "id": "e2",
+      "source": "agent_1",
+      "sourceHandle": "agent",
+      "target": "task_1",
+      "targetHandle": "agent",
+      "type": "acanvas",
+      "data": {}
+    },
+    {
+      "id": "e3",
+      "source": "agent_1",
+      "sourceHandle": "agent",
+      "target": "crew_1",
+      "targetHandle": "agent",
+      "type": "acanvas",
+      "data": {}
+    },
+    {
+      "id": "e4",
+      "source": "task_1",
+      "sourceHandle": "task",
+      "target": "crew_1",
+      "targetHandle": "task",
+      "type": "acanvas",
+      "data": {}
+    }
+  ],
+  "meta": {
+    "requires_keys": [
+      "OPENAI_API_KEY"
+    ],
+    "difficulty": 1
+  }
+}
