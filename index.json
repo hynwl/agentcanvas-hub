@@ -1,6 +1,264 @@
 {
   "schema_version": "1.0",
   "generated_by": "scripts/build_index.py",
-  "team_count": 0,
-  "teams": []
+  "team_count": 10,
+  "teams": [
+    {
+      "slug": "blog-and-seo-crew",
+      "id": "cvs_hub_blog_and_seo_crew",
+      "name": "Blog & SEO Crew",
+      "description": "Trend research, then writing, then an SEO pass — run in sequence.",
+      "tags": [
+        "openai",
+        "search",
+        "seo",
+        "serper",
+        "writing"
+      ],
+      "author": "AgentCanvas",
+      "license": "CC0-1.0",
+      "revision": 1,
+      "forked_from": null,
+      "created_at": "2026-09-08T00:00:00.000Z",
+      "updated_at": "2026-09-08T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [
+          "OPENAI_API_KEY",
+          "SERPER_API_KEY"
+        ],
+        "difficulty": 2
+      },
+      "path": "teams/blog-and-seo-crew/team.acanvas.json",
+      "thumbnail": "teams/blog-and-seo-crew/preview.png"
+    },
+    {
+      "slug": "code-review-crew",
+      "id": "cvs_hub_code_review_crew",
+      "name": "Code Review Crew",
+      "description": "Three reviewers — correctness, tests, readability — working under a manager LLM instead of a fixed order. Paste a unified diff and get findings ranked by what actually breaks.",
+      "tags": [
+        "engineering",
+        "hierarchical",
+        "openai",
+        "review"
+      ],
+      "author": "AgentCanvas",
+      "license": "CC0-1.0",
+      "revision": 1,
+      "forked_from": null,
+      "created_at": "2026-09-08T00:00:00.000Z",
+      "updated_at": "2026-09-08T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [
+          "OPENAI_API_KEY"
+        ],
+        "difficulty": 2
+      },
+      "path": "teams/code-review-crew/team.acanvas.json",
+      "thumbnail": "teams/code-review-crew/preview.png"
+    },
+    {
+      "slug": "competitor-price-watch",
+      "id": "cvs_hub_competitor_price_watch",
+      "name": "Competitor Price Watch",
+      "description": "Reads competitors' own pricing pages, records what it saw and where, then compares only the things that are actually comparable.",
+      "tags": [
+        "openai",
+        "pricing",
+        "research",
+        "search",
+        "serper"
+      ],
+      "author": "AgentCanvas",
+      "license": "CC0-1.0",
+      "revision": 1,
+      "forked_from": null,
+      "created_at": "2026-09-08T00:00:00.000Z",
+      "updated_at": "2026-09-08T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [
+          "OPENAI_API_KEY",
+          "SERPER_API_KEY"
+        ],
+        "difficulty": 2
+      },
+      "path": "teams/competitor-price-watch/team.acanvas.json",
+      "thumbnail": "teams/competitor-price-watch/preview.png"
+    },
+    {
+      "slug": "hello-crew",
+      "id": "cvs_hub_hello_crew",
+      "name": "Hello Crew",
+      "description": "One agent and one task. Your first successful run in under three minutes.",
+      "tags": [
+        "openai",
+        "starter"
+      ],
+      "author": "AgentCanvas",
+      "license": "CC0-1.0",
+      "revision": 1,
+      "forked_from": null,
+      "created_at": "2026-09-08T00:00:00.000Z",
+      "updated_at": "2026-09-08T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [
+          "OPENAI_API_KEY"
+        ],
+        "difficulty": 1
+      },
+      "path": "teams/hello-crew/team.acanvas.json",
+      "thumbnail": "teams/hello-crew/preview.png"
+    },
+    {
+      "slug": "local-summarizer",
+      "id": "cvs_hub_local_summarizer",
+      "name": "Local-only Summarizer",
+      "description": "Uses only a local Ollama model. No API key, no cost.",
+      "tags": [
+        "local",
+        "no-key",
+        "ollama",
+        "starter"
+      ],
+      "author": "AgentCanvas",
+      "license": "CC0-1.0",
+      "revision": 1,
+      "forked_from": null,
+      "created_at": "2026-09-08T00:00:00.000Z",
+      "updated_at": "2026-09-08T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [],
+        "difficulty": 1
+      },
+      "path": "teams/local-summarizer/team.acanvas.json",
+      "thumbnail": "teams/local-summarizer/preview.png"
+    },
+    {
+      "slug": "market-research-crew",
+      "id": "cvs_hub_market_research_crew",
+      "name": "Market Research Report",
+      "description": "Three independent research tracks, synthesized by an analyst into one report.",
+      "tags": [
+        "openai",
+        "report",
+        "research",
+        "search",
+        "serper"
+      ],
+      "author": "AgentCanvas",
+      "license": "CC0-1.0",
+      "revision": 1,
+      "forked_from": null,
+      "created_at": "2026-09-08T00:00:00.000Z",
+      "updated_at": "2026-09-08T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [
+          "OPENAI_API_KEY",
+          "SERPER_API_KEY"
+        ],
+        "difficulty": 2
+      },
+      "path": "teams/market-research-crew/team.acanvas.json",
+      "thumbnail": "teams/market-research-crew/preview.png"
+    },
+    {
+      "slug": "meeting-notes-to-actions",
+      "id": "cvs_hub_meeting_notes_to_actions",
+      "name": "Meeting Notes to Action Items",
+      "description": "Paste a transcript; get decisions, open questions and an owner-and-date action table. Runs entirely on your own Ollama — nothing leaves the machine.",
+      "tags": [
+        "local",
+        "meetings",
+        "no-key",
+        "ollama"
+      ],
+      "author": "AgentCanvas",
+      "license": "CC0-1.0",
+      "revision": 1,
+      "forked_from": null,
+      "created_at": "2026-09-08T00:00:00.000Z",
+      "updated_at": "2026-09-08T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [],
+        "difficulty": 1
+      },
+      "path": "teams/meeting-notes-to-actions/team.acanvas.json",
+      "thumbnail": "teams/meeting-notes-to-actions/preview.png"
+    },
+    {
+      "slug": "resume-tailor",
+      "id": "cvs_hub_resume_tailor",
+      "name": "Résumé Tailor",
+      "description": "Reads a job posting and your résumé, puts the matching experience first in the employer's own words, then drills you on the gaps it could not paper over.",
+      "tags": [
+        "career",
+        "openai",
+        "writing"
+      ],
+      "author": "AgentCanvas",
+      "license": "CC0-1.0",
+      "revision": 1,
+      "forked_from": null,
+      "created_at": "2026-09-08T00:00:00.000Z",
+      "updated_at": "2026-09-08T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [
+          "OPENAI_API_KEY"
+        ],
+        "difficulty": 2
+      },
+      "path": "teams/resume-tailor/team.acanvas.json",
+      "thumbnail": "teams/resume-tailor/preview.png"
+    },
+    {
+      "slug": "support-triage-desk",
+      "id": "cvs_hub_support_triage_desk",
+      "name": "Support Triage Desk",
+      "description": "Classifies an incoming customer message, drafts a reply that refuses to invent timelines, and stops for a human to approve before anything is sent.",
+      "tags": [
+        "human-in-the-loop",
+        "openai",
+        "support"
+      ],
+      "author": "AgentCanvas",
+      "license": "CC0-1.0",
+      "revision": 1,
+      "forked_from": null,
+      "created_at": "2026-09-08T00:00:00.000Z",
+      "updated_at": "2026-09-08T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [
+          "OPENAI_API_KEY"
+        ],
+        "difficulty": 3
+      },
+      "path": "teams/support-triage-desk/team.acanvas.json",
+      "thumbnail": "teams/support-triage-desk/preview.png"
+    },
+    {
+      "slug": "youtube-script-pipeline",
+      "id": "cvs_hub_youtube_script_pipeline",
+      "name": "YouTube Script Pipeline",
+      "description": "Outline, script, then hook optimization — all in one run.",
+      "tags": [
+        "openai",
+        "video",
+        "writing"
+      ],
+      "author": "AgentCanvas",
+      "license": "CC0-1.0",
+      "revision": 1,
+      "forked_from": null,
+      "created_at": "2026-09-08T00:00:00.000Z",
+      "updated_at": "2026-09-08T00:00:00.000Z",
+      "meta": {
+        "requires_keys": [
+          "OPENAI_API_KEY"
+        ],
+        "difficulty": 2
+      },
+      "path": "teams/youtube-script-pipeline/team.acanvas.json",
+      "thumbnail": "teams/youtube-script-pipeline/preview.png"
+    }
+  ]
 }

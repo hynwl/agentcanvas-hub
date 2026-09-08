@@ -63,9 +63,10 @@ AGPL-3.0 — publishing a team here doesn't relicense it.
 
 ## Submitting a team
 
-A step-by-step submission guide is coming in a follow-up change (M5-T8). For
-now, the shape above is the contract: a `teams/<slug>/` directory with the
-three files listed, and a regenerated `index.json`.
+**[CONTRIBUTING.md](CONTRIBUTING.md) is the step-by-step guide.** The short
+version: add a `teams/<slug>/` directory with the three files listed above,
+regenerate `index.json`, and open a pull request. AgentCanvas's **Publish**
+button builds all three files for you and prints the commands.
 
 Every PR touching `teams/` is checked automatically by
 [`.github/workflows/validate.yml`](.github/workflows/validate.yml), which

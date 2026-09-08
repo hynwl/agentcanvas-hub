@@ -1,0 +1,431 @@
+{
+  "schema_version": "1.0",
+  "app_version": "0.1.0",
+  "id": "cvs_hub_support_triage_desk",
+  "name": "Support Triage Desk",
+  "description": "Classifies an incoming customer message, drafts a reply that refuses to invent timelines, and stops for a human to approve before anything is sent.",
+  "tags": [
+    "human-in-the-loop",
+    "openai",
+    "support"
+  ],
+  "author": "AgentCanvas",
+  "created_at": "2026-09-08T00:00:00.000Z",
+  "updated_at": "2026-09-08T00:00:00.000Z",
+  "viewport": {
+    "x": 60,
+    "y": 40,
+    "zoom": 0.75
+  },
+  "nodes": [
+    {
+      "id": "input_1",
+      "type": "input",
+      "position": {
+        "x": 40,
+        "y": 40
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "var_name": "ticket",
+        "label": "Customer message",
+        "input_type": "textarea",
+        "default_value": "",
+        "options": [],
+        "required": true,
+        "description": ""
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "input_2",
+      "type": "input",
+      "position": {
+        "x": 40,
+        "y": 260
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "var_name": "product",
+        "label": "Product or plan name",
+        "input_type": "text",
+        "default_value": "our product",
+        "options": [],
+        "required": true,
+        "description": ""
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "llm_3",
+      "type": "llm",
+      "position": {
+        "x": 40,
+        "y": 460
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "name": "GPT-4o mini",
+        "provider": "openai",
+        "model": "gpt-4o-mini",
+        "temperature": 0.3,
+        "max_tokens": null,
+        "top_p": 1,
+        "base_url": null,
+        "timeout_s": 120,
+        "key_ref": ""
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "agent_4",
+      "type": "agent",
+      "position": {
+        "x": 400,
+        "y": 40
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "name": "Triager",
+        "role": "Support triage specialist",
+        "goal": "Decide what this message actually is — bug, billing, how-to, or something that needs a human now — and how urgent it is.",
+        "backstory": "You have worked a queue long enough to spot the angry-but-trivial and the polite-but-on-fire, and to tell them apart quickly.",
+        "allow_delegation": false,
+        "verbose": true,
+        "max_iter": 20,
+        "max_rpm": null,
+        "cache": true,
+        "respect_context_window": true,
+        "max_execution_time": null,
+        "allow_code_execution": false
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "agent_5",
+      "type": "agent",
+      "position": {
+        "x": 400,
+        "y": 340
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "name": "Reply Drafter",
+        "role": "Support reply writer",
+        "goal": "Write a reply that answers the actual question, admits what is unknown, and never promises a fix or a date.",
+        "backstory": "You write the way a good support engineer talks: short, specific, no false cheer. You would rather say \"I do not know yet, here is what I am checking\" than invent a timeline.",
+        "allow_delegation": false,
+        "verbose": true,
+        "max_iter": 20,
+        "max_rpm": null,
+        "cache": true,
+        "respect_context_window": true,
+        "max_execution_time": null,
+        "allow_code_execution": false
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "task_6",
+      "type": "task",
+      "position": {
+        "x": 780,
+        "y": 40
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "name": "Triage Ticket",
+        "description": "Classify the customer message below about {product}. Output: category (bug / billing / how-to / feature request / escalate), urgency (low / normal / high) with a one-line reason, and the single question that must be answered for this to be resolved.\n\n{ticket}",
+        "expected_output": "Category, urgency with reason, and the one blocking question — nothing else.",
+        "async_execution": false,
+        "human_input": false,
+        "markdown": true,
+        "output_file": null,
+        "max_retries": null
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "task_7",
+      "type": "task",
+      "position": {
+        "x": 780,
+        "y": 340
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "name": "Draft Reply",
+        "description": "Write the reply to the customer. Answer the blocking question if it can be answered from the message; if it cannot, ask for exactly the information you need, one item at a time. Do not promise a fix, a refund or a date. Keep it under 150 words.",
+        "expected_output": "A ready-to-send reply under 150 words, plus a one-line internal note on what the agent should check before sending.",
+        "async_execution": false,
+        "human_input": false,
+        "markdown": true,
+        "output_file": null,
+        "max_retries": null
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "human_8",
+      "type": "human",
+      "position": {
+        "x": 1160,
+        "y": 620
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "name": "Approve Reply",
+        "prompt": "Read the drafted reply. Send it as-is, or paste the version you want sent.",
+        "timeout_s": 900,
+        "on_timeout": "abort"
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "crew_9",
+      "type": "crew",
+      "position": {
+        "x": 1160,
+        "y": 190
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "name": "Support Triage Crew",
+        "process": "sequential",
+        "verbose": true,
+        "memory": false,
+        "cache": true,
+        "planning": false,
+        "max_rpm": null
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    },
+    {
+      "id": "output_10",
+      "type": "output",
+      "position": {
+        "x": 1520,
+        "y": 190
+      },
+      "width": null,
+      "height": null,
+      "data": {
+        "title": "Reply and triage note",
+        "render_as": "markdown",
+        "allow_download": true
+      },
+      "ui": {
+        "collapsed": false,
+        "pinned": false,
+        "bypassed": false,
+        "colorOverride": null
+      },
+      "parentNode": null,
+      "extent": null
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_1",
+      "source": "llm_3",
+      "sourceHandle": "llm",
+      "target": "agent_4",
+      "targetHandle": "llm",
+      "type": "acanvas",
+      "data": {
+        "port_type": "llm"
+      }
+    },
+    {
+      "id": "e_2",
+      "source": "agent_4",
+      "sourceHandle": "agent",
+      "target": "crew_9",
+      "targetHandle": "agent",
+      "type": "acanvas",
+      "data": {
+        "port_type": "agent"
+      }
+    },
+    {
+      "id": "e_3",
+      "source": "llm_3",
+      "sourceHandle": "llm",
+      "target": "agent_5",
+      "targetHandle": "llm",
+      "type": "acanvas",
+      "data": {
+        "port_type": "llm"
+      }
+    },
+    {
+      "id": "e_4",
+      "source": "agent_5",
+      "sourceHandle": "agent",
+      "target": "crew_9",
+      "targetHandle": "agent",
+      "type": "acanvas",
+      "data": {
+        "port_type": "agent"
+      }
+    },
+    {
+      "id": "e_5",
+      "source": "agent_4",
+      "sourceHandle": "agent",
+      "target": "task_6",
+      "targetHandle": "agent",
+      "type": "acanvas",
+      "data": {
+        "port_type": "agent"
+      }
+    },
+    {
+      "id": "e_6",
+      "source": "agent_5",
+      "sourceHandle": "agent",
+      "target": "task_7",
+      "targetHandle": "agent",
+      "type": "acanvas",
+      "data": {
+        "port_type": "agent"
+      }
+    },
+    {
+      "id": "e_7",
+      "source": "task_6",
+      "sourceHandle": "task",
+      "target": "task_7",
+      "targetHandle": "context",
+      "type": "acanvas",
+      "data": {
+        "port_type": "task"
+      }
+    },
+    {
+      "id": "e_8",
+      "source": "task_6",
+      "sourceHandle": "task",
+      "target": "crew_9",
+      "targetHandle": "task",
+      "type": "acanvas",
+      "data": {
+        "port_type": "task"
+      }
+    },
+    {
+      "id": "e_9",
+      "source": "task_7",
+      "sourceHandle": "task",
+      "target": "crew_9",
+      "targetHandle": "task",
+      "type": "acanvas",
+      "data": {
+        "port_type": "task"
+      }
+    },
+    {
+      "id": "e_10",
+      "source": "task_7",
+      "sourceHandle": "task",
+      "target": "human_8",
+      "targetHandle": "task",
+      "type": "acanvas",
+      "data": {
+        "port_type": "task"
+      }
+    },
+    {
+      "id": "e_11",
+      "source": "crew_9",
+      "sourceHandle": "result",
+      "target": "output_10",
+      "targetHandle": "result",
+      "type": "acanvas",
+      "data": {
+        "port_type": "result"
+      }
+    }
+  ],
+  "meta": {
+    "requires_keys": [
+      "OPENAI_API_KEY"
+    ],
+    "difficulty": 3
+  },
+  "license": "CC0-1.0",
+  "revision": 1,
+  "forked_from": null
+}
