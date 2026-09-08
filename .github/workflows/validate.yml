@@ -25,14 +25,20 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Every check below runs even if an earlier one failed (but not if the
+      # job was cancelled) — a contributor fixing a submission should see
+      # every problem in one CI run, not discover them one push at a time.
       - name: Self-test the validator (fixtures)
+        if: ${{ !cancelled() }}
         run: python3 tests/test_validate_submission.py -v
 
       - name: index.json is up to date
+        if: ${{ !cancelled() }}
         run: python3 scripts/build_index.py --check
 
       - name: Determine changed teams
         id: changed
+        if: ${{ !cancelled() }}
         run: |
           base="${{ github.event.pull_request.base.sha }}"
           head="${{ github.event.pull_request.head.sha }}"
@@ -48,7 +54,7 @@ jobs:
           fi
 
       - name: Validate changed team(s)
-        if: steps.changed.outputs.count != '0'
+        if: ${{ !cancelled() && steps.changed.outputs.count != '0' }}
         # Slugs come from attacker-controlled directory names in the PR diff —
         # pass them through an env var rather than interpolating `${{ }}`
         # straight into the script text, or a crafted slug like `$(curl evil)`
